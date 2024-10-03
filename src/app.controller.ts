@@ -60,6 +60,9 @@ export class AppController {
   if(accdata.balance<0){
     errors.push("pozitivnak kell lenie ")
   }
+  if(this.#accconts.find(e=>e.id==accdata.id)!=undefined){
+    errors.push("Az id már foglalt")
+  }
     let newAccount = {
       id: accdata.id,
       owner: accdata.owner,
