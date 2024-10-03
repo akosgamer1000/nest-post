@@ -54,6 +54,12 @@ export class AppController {
   if(!/^\d{4}-\d{4}$/.test(accdata.id)){
     errors.push("A számlaszám nem megfelelö formátum")
   }
+  if(isNaN(accdata.balance)){
+      errors.push("szának kell lenie")
+  }
+  if(accdata.balance<0){
+    errors.push("pozitivnak kell lenie ")
+  }
     let newAccount = {
       id: accdata.id,
       owner: accdata.owner,
