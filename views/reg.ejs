@@ -8,11 +8,11 @@
 <body>
     <form method="post">
       id: <br>
-      <input type="text" name="id" id="id" value=<%=data.id%>><br>
+      <input type="text" name="id" id="id" value="<%=data.id%>" required ><br>
      name: <br>
-      <input type="text" name="owner" id="name" value=<%=data.owner%>><br>
+      <input type="text" name="owner" id="name" value="<%=data.owner%>" required><br>
       balance: <br>
-       <input type="number" name="balance" id="balance" value=<%=data.balance%>><br>
+       <input type="number" name="balance" id="balance" value="<%=data.balance%>" required><br>
        <input type="submit" value="számlanyitás"><br>
        <% for(let err of errors){%>
           <p style="color:red"><%=err%></p>

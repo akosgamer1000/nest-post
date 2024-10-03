@@ -35,54 +35,54 @@ export class AppController {
   @Get("/register")
   @Render("reg.ejs")
   Reg() {
-    return{
-      errors:[],
-      data:{}
+    return {
+      errors: [],
+      data: {}
     }
   }
 
   @Post("/register")
 
   newAccont(@Body() accdata: NewAccountDto,
-    @Res() response:Response
+    @Res() response: Response
 
-) {
-  const errors:string[]=[];
-  if(!accdata.balance || !accdata.id || !accdata.owner){
-    errors.push('minden mezöt kötelezö megadni')
-  }
-  if(!/^\d{4}-\d{4}$/.test(accdata.id)){
-    errors.push("A számlaszám nem megfelelö formátum")
-  }
-  if(isNaN(accdata.balance)){
+  ) {
+    const errors: string[] = [];
+    if (!accdata.balance || !accdata.id || !accdata.owner) {
+      errors.push('minden mezöt kötelezö megadni')
+    }
+    if (!/^\d{4}-\d{4}$/.test(accdata.id)) {
+      errors.push("A számlaszám nem megfelelö formátum")
+    }
+    if (isNaN(accdata.balance)) {
       errors.push("szának kell lenie")
-  }
-  if(accdata.balance<0){
-    errors.push("pozitivnak kell lenie ")
-  }
-  if(this.#accconts.find(e=>e.id==accdata.id)!=undefined){
-    errors.push("Az id már foglalt")
-  }
+    }
+    if (accdata.balance < 0) {
+      errors.push("pozitivnak kell lenie ")
+    }
+    if (this.#accconts.find(e => e.id == accdata.id) != undefined) {
+      errors.push("Az id már foglalt")
+    }
     let newAccount = {
       id: accdata.id,
       owner: accdata.owner,
       balance: accdata.balance
     }
-    if(errors.length>0){
-      response.render('reg.ejs',{errors,data:accdata})
+    if (errors.length > 0) {
+      response.render('reg.ejs', { errors, data: accdata })
     }
 
 
     this.#accconts.push(newAccount)
-    response.redirect(303,'/newAcc')
+    response.redirect(303, '/newAcc')
 
   }
   @Get("newAcc")
   @Render("succes")
   newAcc() {
     return {
-      accounts:this.#accconts.length
-  
+      accounts: this.#accconts.length
+
     }
-}
   }
+}
